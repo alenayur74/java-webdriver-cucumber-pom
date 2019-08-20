@@ -3,6 +3,8 @@ package pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static support.TestContext.getExecutor;
+
 public class QuoteForm extends Page {
 
     public QuoteForm() {
@@ -20,6 +22,55 @@ public class QuoteForm extends Page {
 
     @FindBy(xpath = "//input[@id='confirmPassword']")
     private WebElement confirmPassword;
+
+    @FindBy(xpath = "//input[@id='name']")
+    private WebElement name;
+
+    // Name dialog - start -
+
+    @FindBy(xpath = "//input[@id='firstName']")
+    private WebElement firstName;
+
+    @FindBy(xpath = "//input[@id='lastName']")
+    private WebElement lastName;
+
+    @FindBy(xpath = "//input[@id='middleName']")
+    private WebElement middleName;
+
+    @FindBy(xpath = "//span[text()='Save']")
+    private WebElement saveButton;
+
+    // Name dialog - end -
+
+    @FindBy(xpath = "//input[@name='agreedToPrivacyPolicy']")
+    private WebElement privacy;
+
+    @FindBy(xpath = "//button[@id='formSubmit']")
+    private WebElement submitButton;
+
+    public void clickSubmit() {
+        submitButton.click();
+    }
+
+    public void clickPrivacy() {
+        getExecutor().executeScript("arguments[0].click();", privacy);
+    }
+
+    public void fillName(String firstName, String lastName) {
+        name.click();
+        this.firstName.sendKeys(firstName);
+        this.lastName.sendKeys(lastName);
+        saveButton.click();
+    }
+
+    public void fillName(String firstName, String middleName, String lastName) {
+        name.click();
+        this.firstName.sendKeys(firstName);
+        this.middleName.sendKeys(middleName);
+        this.lastName.sendKeys(lastName);
+        saveButton.click();
+    }
+
 
     public void fillUsername(String value) {
         username.sendKeys(value);
