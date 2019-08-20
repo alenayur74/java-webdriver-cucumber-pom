@@ -12,7 +12,17 @@ public class UspsObjectStepDefs {
 
     @When("I go to {string} oop")
     public void iGoToOop(String buttonType) {
-        new Usps().clickStamps();
+        switch (buttonType) {
+            case "stamps":
+                new Usps().clickStamps();
+                break;
+            case "boxes":
+                //
+                break;
+            default:
+                throw new RuntimeException("Unrecognized buttonType: " + buttonType);
+        }
+
     }
 
     @And("I sort by {string} oop")
